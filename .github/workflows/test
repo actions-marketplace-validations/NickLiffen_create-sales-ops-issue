@@ -1,0 +1,23 @@
+name: "CI"
+on:
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: 'Issue Number'
+        required: true
+        default: '4'
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse Issue Body
+        uses: peter-murray/issue-body-parser-action@v1
+        id: issue_body_parser
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_id: ${{ github.event.inputs.issue }}
+          payload_marker: target_payload
+      - name: Parse Issue Body
+        run: |
+          echo ${{ steps.issue_body_parser.outputs.payload }}
