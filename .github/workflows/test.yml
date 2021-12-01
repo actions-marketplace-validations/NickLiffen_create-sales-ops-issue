@@ -1,4 +1,4 @@
-name: "CI"
+name: "Test"
 on:
   workflow_dispatch:
     inputs:
@@ -17,7 +17,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_id: ${{ github.event.inputs.issue }}
-          payload_marker: target_payload
+          payload_marker: ghas_poc_object
       - name: Parse Issue Body
         run: |
           echo ${{ steps.issue_body_parser.outputs.payload }}
