@@ -10,7 +10,8 @@
     "lint:check": "eslint . --ext .ts",
     "lint:write": "eslint --fix . --ext .ts",
     "test": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "local": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
