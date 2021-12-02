@@ -20,7 +20,7 @@ outputs:
   opsIssueURL:
     description: 'The Issue url Created in the Ops Repo'
 runs:
-  using: 'node16'
+  using: 'node12'
   main: 'dist/index.js'
 branding:
   icon: 'target'  
