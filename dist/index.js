@@ -7,9 +7,11 @@
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.issueBodyTemplate = void 0;
+exports.issueTitleTemplate = exports.issueBodyTemplate = void 0;
 const issueBodyTemplate_1 = __nccwpck_require__(470);
 Object.defineProperty(exports, "issueBodyTemplate", ({ enumerable: true, get: function () { return issueBodyTemplate_1.issueBodyTemplate; } }));
+const issueTitleTemplate_1 = __nccwpck_require__(751);
+Object.defineProperty(exports, "issueTitleTemplate", ({ enumerable: true, get: function () { return issueTitleTemplate_1.issueTitleTemplate; } }));
 
 
 /***/ }),
@@ -40,6 +42,18 @@ Approved By: __${person_who_approved_trial}__
 ---
 **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
 exports.issueBodyTemplate = issueBodyTemplate;
+
+
+/***/ }),
+
+/***/ 751:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.issueTitleTemplate = void 0;
+const issueTitleTemplate = ({ client_name, }) => `Enable GitHub Advanced Security Trial: ${client_name}`;
+exports.issueTitleTemplate = issueTitleTemplate;
 
 
 /***/ })
@@ -89,6 +103,7 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const utils_1 = __nccwpck_require__(252);
+const utils_2 = __nccwpck_require__(252);
 const run = async () => {
     const data = {
         client_name: "Client Name",
@@ -101,6 +116,7 @@ const run = async () => {
         person_who_approved_trial: "@nickliffen",
     };
     const issueData = await (0, utils_1.issueBodyTemplate)(data);
+    const issueTitle = await (0, utils_2.issueTitleTemplate)(data);
     console.log(issueData);
 };
 run();

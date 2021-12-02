@@ -1,13 +1,24 @@
-name: 'Action Name'
+name: 'Create Sales Ops issue'
 author: 'NickLiffen'
-description: 'Action Description'
+description: 'An Issue that creates a Sales Ops Issue'
 inputs:
-  inputName:
-    description: 'Input Description'
+  issueBodyPayload:
+    description: 'The Issue Body Payload in a JSON Format'
+    required: true
+  approver:
+    description: 'Who Approved the Trial? GitHub Username'
+    required: true
+  issueNumber:
+    description: 'Who Approved the Trial? GitHub Username'
+    required: true
+  githubToken:
+    description: 'The Token to create an issue on the Sales Ops Issue'
     required: true
 outputs:
-  outputName:
-    description: 'Output Description'
+  opsIssueNumber:
+    description: 'The Issue Number Created in the Ops Repo'
+  opsIssueURL:
+    description: 'The Issue url Created in the Ops Repo'
 runs:
   using: 'node16'
   main: 'dist/index.js'

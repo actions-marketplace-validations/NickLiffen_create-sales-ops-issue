@@ -1,8 +1,8 @@
 {
-  "name": "actions-name",
+  "name": "create-sales-ops-issue",
   "version": "1.0.0",
-  "description": "actions-description",
-  "main": "main.ts",
+  "description": "create-sales-ops-issue",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc && ncc build ./src/main.ts -o dist",
     "prettier:write": "prettier --write '**/*.ts'",
