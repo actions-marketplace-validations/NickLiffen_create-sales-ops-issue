@@ -21,3 +21,11 @@ jobs:
       - name: Parse Issue Body
         run: |
           echo ${{ steps.issue_body_parser.outputs.payload }}
+      - name: Running a Test
+        id: test
+        uses: ./
+        with:
+          issueBodyPayload: ${{ steps.issue_body_parser.outputs.payload }}
+          approver: "NickLiffen"
+          issueNumber: "1234"
+          githubToken: "fefef"
