@@ -21,6 +21,8 @@ jobs:
       - name: Parse Issue Body
         run: |
           echo ${{ steps.issue_body_parser.outputs.payload }}
+      - name: Git Checkout
+        uses: actions/checkout@v2
       - name: Running a Test
         id: test
         uses: ./
