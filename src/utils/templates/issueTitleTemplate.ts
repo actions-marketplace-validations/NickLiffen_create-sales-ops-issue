@@ -1,4 +1,4 @@
 export const issueTitleTemplate = ({
   client_name,
-}: issueBodyTemplate): string =>
+}: IssueBodyTemplate): string =>
   `Enable GitHub Advanced Security Trial: ${client_name}`;

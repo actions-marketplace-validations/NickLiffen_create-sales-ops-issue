@@ -26,8 +26,10 @@ jobs:
       - name: Running a Test
         id: test
         uses: ./
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_SPECIAL_TOKEN }}
+          GITHUB_REPOSITORY: ${{ secrets.REPOSITORY }}
         with:
           issueBodyPayload: ${{ steps.issue_body_parser.outputs.payload }}
           approver: "NickLiffen"
           issueNumber: "1234"
-          githubToken: "fefef"

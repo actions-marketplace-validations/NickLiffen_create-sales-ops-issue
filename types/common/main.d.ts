@@ -47,6 +47,7 @@ type Region =
 type Team = "se" | "ps";
 
 type IssueBodyTemplate = {
+  client_name: string;
   instance_type: Instance;
   github_org: string[];
   trial_duration: number;
