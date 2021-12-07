@@ -50419,11 +50419,7 @@ const run = async () => {
         const issueNumberInput = process.env.CI
             ? core.getInput("issueNumber", { required: false })
             : await (0, utils_1.issueNumber)();
-        console.log(issueBodyInput);
-        console.log(approverInput);
-        console.log(issueNumberInput);
         const issueBody = JSON.parse(issueBodyInput);
-        console.log(issueBody);
         const issueData = await (0, utils_1.issueBodyTemplate)(issueBody, approverInput, issueNumberInput);
         const issueTitle = await (0, utils_1.issueTitleTemplate)(issueBody);
         const octokit = new action_1.Octokit();
@@ -50512,7 +50508,7 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
         ? ":white_check_mark:"
         : ":x:";
     const ghaeCustomerResponse = data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
-    return `
+    const table = `
  **Item** | **Description**
  :--: | :--
  **Client/Prospect:** | ${data.client_name}
@@ -50532,6 +50528,21 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
  
  ---
  **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
+    const response = `
+  ${table} <br /><br /> 
+  <!--
+  \`\`\`json ghas_data
+  ${data}
+  \`\`\`
+  \`\`\`json approver_input
+  ${{ approverInput }}
+  \`\`\`
+  \`\`\`json issue_number_input
+  ${{ issueNumberInput }}
+  \`\`\`
+  -->
+  `;
+    return response;
 };
 exports.issueBodyTemplate = issueBodyTemplate;
 

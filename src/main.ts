@@ -25,12 +25,7 @@ const run = async (): Promise<void> => {
       ? core.getInput("issueNumber", { required: false })
       : await issueNumber();
 
-    console.log(issueBodyInput);
-    console.log(approverInput);
-    console.log(issueNumberInput);
-
     const issueBody = JSON.parse(issueBodyInput) as IssueBodyTemplate;
-    console.log(issueBody);
 
     const issueData = await issueBodyTemplate(
       issueBody,

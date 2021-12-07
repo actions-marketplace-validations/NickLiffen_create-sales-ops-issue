@@ -26,7 +26,7 @@ export const issueBodyTemplate = (
   const ghaeCustomerResponse =
     data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
 
-  return `
+  const table = `
  **Item** | **Description**
  :--: | :--
  **Client/Prospect:** | ${data.client_name}
@@ -46,4 +46,20 @@ export const issueBodyTemplate = (
  
  ---
  **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
+
+  const response = `
+  ${table} <br /><br /> 
+  <!--
+  \`\`\`json ghas_data
+  ${data}
+  \`\`\`
+  \`\`\`json approver_input
+  ${{ approverInput }}
+  \`\`\`
+  \`\`\`json issue_number_input
+  ${{ issueNumberInput }}
+  \`\`\`
+  -->
+  `;
+  return response;
 };
