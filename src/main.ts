@@ -1,31 +1,14 @@
-import * as dotenv from "dotenv";
-
-import {
-  issueBodyTemplate,
-  issueTitleTemplate,
-  issueBodyPayload,
-  approver,
-  issueNumber,
-  createIssue,
-} from "./utils";
-
-process.env.CI ? "" : dotenv.config({ path: __dirname + "/.env" });
+import { issueBodyTemplate, issueTitleTemplate, createIssue } from "./utils";
 
 import * as core from "@actions/core";
 
 const run = async (): Promise<void> => {
   try {
-    const issueBodyInput = process.env.CI
-      ? core.getInput("issueBodyPayload", { required: false })
-      : await issueBodyPayload();
-    const approverInput = process.env.CI
-      ? core.getInput("approver", { required: false })
-      : await approver();
-    const issueNumberInput = process.env.CI
-      ? core.getInput("issueNumber", { required: false })
-      : await issueNumber();
-
-    const issueBody = JSON.parse(issueBodyInput) as IssueBodyTemplate;
+    const issueBody = JSON.parse(
+      core.getInput("issueBodyPayload", { required: false })
+    ) as IssueBodyTemplate;
+    const approverInput = core.getInput("approver", { required: false });
+    const issueNumberInput = core.getInput("issueNumber", { required: false });
 
     const issueData = await issueBodyTemplate(
       issueBody,
@@ -40,7 +23,7 @@ const run = async (): Promise<void> => {
 
     const issueURL = await createIssue(githubRepository, issueTitle, issueData);
 
-    console.log(issueURL);
+    console.log(`The issue has been created here: ${issueURL}`);
   } catch (error) {
     console.error(error);
   }
