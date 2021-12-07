@@ -50499,11 +50499,11 @@ exports.issueBodyTemplate = void 0;
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
     let orgs = "";
     data.github_org.map((org, index) => {
-        orgs += `**${index + 1}**: ${org}, `;
+        orgs += `** Org ${index + 1}**: ${org} <br /> `;
     });
-    const org = `${orgs} (You you also more then welcome to enable on the enterprise of these organisation(s))`;
+    const org = `${orgs} <br /> (If possible, enaling GHAS on the enterprise of these orgs would be great.)`;
     const PSEngineer = data.ps_engineer
-        ? data.ps_engineer
+        ? `@${data.ps_engineer}`
         : "N/A : No PS Engineer Assigned";
     const ghecCustomerResponse = data.instance_type === "GitHub Enterprise Cloud"
         ? ":white_check_mark:"
@@ -50523,10 +50523,10 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
  **Orgs to Enable GHAS:** | ${org}
  **Trial/Extension Length:** | ${data.trial_duration} days
  **Additional details:** | _(i.e. why does your customer need an extension)_
- **POC Issue:** | [issueNumberInput](https://github.com/github/advanced-security-field/${issueNumberInput})
- **Salesforce POC Object: ** | ${data.sfdc_poc_url}
+ **POC Issue:** | [advanced-security-field/${issueNumberInput}](https://github.com/github/advanced-security-field/${issueNumberInput})
+ **Salesforce POC Object:** | ${data.sfdc_poc_url}
  **Links:** | 
- **Tag:** | Sales Rep: @${data.sales_rep}, SE: @${data.solution_engineer}, PS: ${PSEngineer}
+ **Tag:** | Sales Rep: @${data.sales_rep} <br /> Solutions Engineer: @${data.solution_engineer} <br /> Professional Services Engineer: ${PSEngineer}
  
  Approved By: __@${approverInput}__
  
