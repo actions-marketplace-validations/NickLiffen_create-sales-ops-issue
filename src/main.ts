@@ -12,7 +12,6 @@ import {
 process.env.CI ? "" : dotenv.config({ path: __dirname + "/.env" });
 
 import * as core from "@actions/core";
-import { Octokit } from "@octokit/action";
 
 const run = async (): Promise<void> => {
   try {
