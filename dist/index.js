@@ -50499,9 +50499,9 @@ exports.issueBodyTemplate = void 0;
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
     let orgs = "";
     data.github_org.map((org, index) => {
-        orgs += `** Org ${index + 1}**: ${org} <br /> `;
+        orgs += `**Org ${index + 1}**: ${org} <br /> `;
     });
-    const org = `${orgs} <br /> (If possible, enaling GHAS on the enterprise of these orgs would be great.)`;
+    const org = `${orgs} <br /> (**If possible**, enaling GHAS on the enterprise of these orgs would be great)`;
     const PSEngineer = data.ps_engineer
         ? `@${data.ps_engineer}`
         : "N/A : No PS Engineer Assigned";
