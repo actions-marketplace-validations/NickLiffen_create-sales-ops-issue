@@ -50497,29 +50497,38 @@ exports.token = token;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueBodyTemplate = void 0;
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
-    const baseLicenceType = data.instance_type === "GitHub AE"
-        ? "GitHub Enterprise Cloud"
-        : "GitHub Enterprise Server";
-    const githubCloudOrgName = data.instance_type === "GitHub Enterprise Cloud"
-        ? data.github_org
-        : "N/A : GHAS not being enabled on a Cloud Organisation";
-    const githubServerOrgName = data.instance_type === "GitHub Enterprise Server"
-        ? data.github_org
-        : "N/A : GHAS not being enabled on a Server Organisation";
+    let orgs = "";
+    data.github_org.map((org, index) => {
+        orgs += `**${index + 1}**: ${org}\n`;
+    });
+    const org = "\n\n" +
+        orgs +
+        "\n\n You you also more then welcome to enable on the enterprise of these organisation(s)";
+    const PSEngineer = data.ps_engineer
+        ? data.ps_engineer
+        : "N/A : No PS Engineer Assigned";
+    const ghecCustomerResponse = data.instance_type === "GitHub Enterprise Cloud"
+        ? ":white_check_mark:"
+        : ":x:";
+    const ghesCustomerResponse = data.instance_type === "GitHub Enterprise Server"
+        ? ":white_check_mark:"
+        : ":x:";
+    const ghaeCustomerResponse = data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
     return `
  **Item** | **Description**
  :--: | :--
- **Client/Prospect** | ${data.client_name}
- **Base License Type** | <li>- [x] ${baseLicenceType}</li>
- **:stop_sign: Add-ons?** | <li>- [x] __Advanced Security__</li>
- **Admin email** | 
- **Cloud org name** | ${githubCloudOrgName}
- **Server org name** | ${githubServerOrgName}
- **Trial/Extension Length** | ${data.trial_duration} days
- **Additional details** | _(i.e. why does your customer need an extension)_
- **POC Issue** | https://github.com/github/advanced-security-field/${issueNumberInput}
- **Links** | 
- **Tag** | @${data.sales_rep}
+ **Client/Prospect: ** | ${data.client_name}
+ **GHEC Customer?: ** | ${ghecCustomerResponse}
+ **GHES Customer?: ** | ${ghesCustomerResponse}
+ **GHAE Customer?: ** | ${ghaeCustomerResponse}
+ **:stop_sign: Add-ons? ** | <li>- [x] __Advanced Security__</li>
+ **Orgs to Enable GHAS: ** | ${org}
+ **Trial/Extension Length: ** | ${data.trial_duration} days
+ **Additional details: ** | _(i.e. why does your customer need an extension)_
+ **POC Issue: ** | [issueNumberInput](https://github.com/github/advanced-security-field/${issueNumberInput})
+ **Salesforce POC Object: ** | ${data.sfdc_poc_url}
+ **Links: ** | 
+ **Tag: ** | Sales Rep: @${data.sales_rep}, SE: @${data.solution_engineer}, PS: ${PSEngineer}
  
  Approved By: __@${approverInput}__
  
