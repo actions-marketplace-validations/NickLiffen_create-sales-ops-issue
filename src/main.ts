@@ -16,7 +16,7 @@ import { Octokit } from "@octokit/action";
 const run = async (): Promise<void> => {
   try {
     const issueBodyInput = process.env.CI
-      ? core.getInput("issueBody", { required: false })
+      ? core.getInput("issueBodyPayload", { required: false })
       : await issueBodyPayload();
     const approverInput = process.env.CI
       ? core.getInput("approver", { required: false })
