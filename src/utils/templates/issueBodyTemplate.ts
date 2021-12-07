@@ -5,16 +5,20 @@ export const issueBodyTemplate = (
 ): string => {
   let orgs = "";
 
+  // Providing a readable structure for the orgs
   data.github_org.map((org, index) => {
     orgs += `**GitHub Org ${index + 1}**: ${org} <br /> `;
   });
 
+  // As we provie orgs not repos, a message asking to enable on the enterprises.
   const org = `${orgs} <br /> (**If possible**, enaling GHAS on the enterprise of these orgs would be great)`;
 
+  // Providing a readable format for the PS Engineer
   const PSEngineer = data.ps_engineer
     ? `@${data.ps_engineer}`
     : "N/A : No PS Engineer Assigned";
 
+  // Deciding what to put a tick next to or a X next to.
   const ghecCustomerResponse =
     data.instance_type === "GitHub Enterprise Cloud"
       ? ":white_check_mark:"
@@ -26,6 +30,7 @@ export const issueBodyTemplate = (
   const ghaeCustomerResponse =
     data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
 
+  // Putting all of the data into a table so it is readable
   const table = `
  **Item** | **Description**
  :--: | :--
@@ -47,6 +52,7 @@ export const issueBodyTemplate = (
  ---
  **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
 
+  // Formalising the whole issue response. Hiding some data at the bottom of the issue that is used downstream.
   const response = `
   ${table} <br /><br /> 
   <!--

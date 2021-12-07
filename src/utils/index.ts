@@ -7,6 +7,8 @@ import {
   token,
 } from "./local/inputData";
 
+import { createIssue } from "./createIssue";
+
 export {
   issueBodyTemplate,
   issueTitleTemplate,
@@ -14,4 +16,5 @@ export {
   approver,
   issueNumber,
   token,
+  createIssue,
 };

@@ -6,6 +6,7 @@ import {
   issueBodyPayload,
   approver,
   issueNumber,
+  createIssue,
 } from "./utils";
 
 process.env.CI ? "" : dotenv.config({ path: __dirname + "/.env" });
@@ -34,23 +35,13 @@ const run = async (): Promise<void> => {
     );
     const issueTitle = await issueTitleTemplate(issueBody);
 
-    const octokit = new Octokit();
-
     const githubRepository = process.env.GITHUB_REPOSITORY as string;
 
     if (!githubRepository) throw new Error("GITHUB_REPOSITORY is not set");
 
-    const [owner, repo] = githubRepository.split("/");
-    const { data } = await octokit.request(
-      "POST /repos/{owner}/{repo}/issues",
-      {
-        owner,
-        repo,
-        title: issueTitle,
-        body: issueData,
-      }
-    );
-    console.log("Issue created: %s", data.html_url);
+    const issueURL = await createIssue(githubRepository, issueTitle, issueData);
+
+    console.log(issueURL);
   } catch (error) {
     console.error(error);
   }

@@ -50407,7 +50407,6 @@ const dotenv = __importStar(__nccwpck_require__(2437));
 const utils_1 = __nccwpck_require__(6252);
 process.env.CI ? "" : dotenv.config({ path: __dirname + "/.env" });
 const core = __importStar(__nccwpck_require__(2186));
-const action_1 = __nccwpck_require__(1231);
 const run = async () => {
     try {
         const issueBodyInput = process.env.CI
@@ -50422,18 +50421,11 @@ const run = async () => {
         const issueBody = JSON.parse(issueBodyInput);
         const issueData = await (0, utils_1.issueBodyTemplate)(issueBody, approverInput, issueNumberInput);
         const issueTitle = await (0, utils_1.issueTitleTemplate)(issueBody);
-        const octokit = new action_1.Octokit();
         const githubRepository = process.env.GITHUB_REPOSITORY;
         if (!githubRepository)
             throw new Error("GITHUB_REPOSITORY is not set");
-        const [owner, repo] = githubRepository.split("/");
-        const { data } = await octokit.request("POST /repos/{owner}/{repo}/issues", {
-            owner,
-            repo,
-            title: issueTitle,
-            body: issueData,
-        });
-        console.log("Issue created: %s", data.html_url);
+        const issueURL = await (0, utils_1.createIssue)(githubRepository, issueTitle, issueData);
+        console.log(issueURL);
     }
     catch (error) {
         console.error(error);
@@ -50444,13 +50436,37 @@ run();
 
 /***/ }),
 
+/***/ 7078:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createIssue = void 0;
+const action_1 = __nccwpck_require__(1231);
+const createIssue = async (githubRepository, issueTitle, issueBody) => {
+    const octokit = new action_1.Octokit();
+    const [owner, repo] = githubRepository.split("/");
+    const { data } = await octokit.request("POST /repos/{owner}/{repo}/issues", {
+        owner,
+        repo,
+        title: issueTitle,
+        body: issueBody,
+    });
+    return data.html_url;
+};
+exports.createIssue = createIssue;
+
+
+/***/ }),
+
 /***/ 6252:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.token = exports.issueNumber = exports.approver = exports.issueBodyPayload = exports.issueTitleTemplate = exports.issueBodyTemplate = void 0;
+exports.createIssue = exports.token = exports.issueNumber = exports.approver = exports.issueBodyPayload = exports.issueTitleTemplate = exports.issueBodyTemplate = void 0;
 const issueBodyTemplate_1 = __nccwpck_require__(8470);
 Object.defineProperty(exports, "issueBodyTemplate", ({ enumerable: true, get: function () { return issueBodyTemplate_1.issueBodyTemplate; } }));
 const issueTitleTemplate_1 = __nccwpck_require__(4751);
@@ -50460,6 +50476,8 @@ Object.defineProperty(exports, "issueBodyPayload", ({ enumerable: true, get: fun
 Object.defineProperty(exports, "approver", ({ enumerable: true, get: function () { return inputData_1.approver; } }));
 Object.defineProperty(exports, "issueNumber", ({ enumerable: true, get: function () { return inputData_1.issueNumber; } }));
 Object.defineProperty(exports, "token", ({ enumerable: true, get: function () { return inputData_1.token; } }));
+const createIssue_1 = __nccwpck_require__(7078);
+Object.defineProperty(exports, "createIssue", ({ enumerable: true, get: function () { return createIssue_1.createIssue; } }));
 
 
 /***/ }),
@@ -50494,13 +50512,17 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueBodyTemplate = void 0;
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
     let orgs = "";
+    // Providing a readable structure for the orgs
     data.github_org.map((org, index) => {
         orgs += `**GitHub Org ${index + 1}**: ${org} <br /> `;
     });
+    // As we provie orgs not repos, a message asking to enable on the enterprises.
     const org = `${orgs} <br /> (**If possible**, enaling GHAS on the enterprise of these orgs would be great)`;
+    // Providing a readable format for the PS Engineer
     const PSEngineer = data.ps_engineer
         ? `@${data.ps_engineer}`
         : "N/A : No PS Engineer Assigned";
+    // Deciding what to put a tick next to or a X next to.
     const ghecCustomerResponse = data.instance_type === "GitHub Enterprise Cloud"
         ? ":white_check_mark:"
         : ":x:";
@@ -50508,6 +50530,7 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
         ? ":white_check_mark:"
         : ":x:";
     const ghaeCustomerResponse = data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
+    // Putting all of the data into a table so it is readable
     const table = `
  **Item** | **Description**
  :--: | :--
@@ -50528,6 +50551,7 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
  
  ---
  **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
+    // Formalising the whole issue response. Hiding some data at the bottom of the issue that is used downstream.
     const response = `
   ${table} <br /><br /> 
   <!--
