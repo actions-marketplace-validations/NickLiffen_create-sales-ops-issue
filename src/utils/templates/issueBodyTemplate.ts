@@ -6,13 +6,10 @@ export const issueBodyTemplate = (
   let orgs = "";
 
   data.github_org.map((org, index) => {
-    orgs += `**${index + 1}**: ${org}\n`;
+    orgs += `**${index + 1}**: ${org}, `;
   });
 
-  const org =
-    "\n\n" +
-    orgs +
-    "\n\n You you also more then welcome to enable on the enterprise of these organisation(s)";
+  const org = `${orgs} (You you also more then welcome to enable on the enterprise of these organisation(s))`;
 
   const PSEngineer = data.ps_engineer
     ? data.ps_engineer
@@ -32,18 +29,18 @@ export const issueBodyTemplate = (
   return `
  **Item** | **Description**
  :--: | :--
- **Client/Prospect: ** | ${data.client_name}
- **GHEC Customer?: ** | ${ghecCustomerResponse}
- **GHES Customer?: ** | ${ghesCustomerResponse}
- **GHAE Customer?: ** | ${ghaeCustomerResponse}
- **:stop_sign: Add-ons? ** | <li>- [x] __Advanced Security__</li>
- **Orgs to Enable GHAS: ** | ${org}
- **Trial/Extension Length: ** | ${data.trial_duration} days
- **Additional details: ** | _(i.e. why does your customer need an extension)_
- **POC Issue: ** | [issueNumberInput](https://github.com/github/advanced-security-field/${issueNumberInput})
+ **Client/Prospect:** | ${data.client_name}
+ **GHEC Customer?:** | ${ghecCustomerResponse}
+ **GHES Customer?:** | ${ghesCustomerResponse}
+ **GHAE Customer?:** | ${ghaeCustomerResponse}
+ **:stop_sign: Add-ons?** | <li>- [x] __Advanced Security__</li>
+ **Orgs to Enable GHAS:** | ${org}
+ **Trial/Extension Length:** | ${data.trial_duration} days
+ **Additional details:** | _(i.e. why does your customer need an extension)_
+ **POC Issue:** | [issueNumberInput](https://github.com/github/advanced-security-field/${issueNumberInput})
  **Salesforce POC Object: ** | ${data.sfdc_poc_url}
- **Links: ** | 
- **Tag: ** | Sales Rep: @${data.sales_rep}, SE: @${data.solution_engineer}, PS: ${PSEngineer}
+ **Links:** | 
+ **Tag:** | Sales Rep: @${data.sales_rep}, SE: @${data.solution_engineer}, PS: ${PSEngineer}
  
  Approved By: __@${approverInput}__
  
