@@ -50532,13 +50532,13 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
   ${table} <br /><br /> 
   <!--
   \`\`\`json ghas_data
-  ${data}
+  ${JSON.stringify(data, null, 2)}
   \`\`\`
   \`\`\`json approver_input
-  ${{ approverInput }}
+  ${JSON.stringify({ approverInput }, null, 2)}
   \`\`\`
   \`\`\`json issue_number_input
-  ${{ issueNumberInput }}
+  ${JSON.stringify({ issueNumberInput }, null, 2)}
   \`\`\`
   -->
   `;
