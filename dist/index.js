@@ -50419,10 +50419,11 @@ const run = async () => {
         const issueNumberInput = process.env.CI
             ? core.getInput("issueNumber", { required: false })
             : await (0, utils_1.issueNumber)();
-        const issueBody = JSON.parse(issueBodyInput);
-        console.log(issueBody);
+        console.log(issueBodyInput);
         console.log(approverInput);
         console.log(issueNumberInput);
+        const issueBody = JSON.parse(issueBodyInput);
+        console.log(issueBody);
         const issueData = await (0, utils_1.issueBodyTemplate)(issueBody, approverInput, issueNumberInput);
         const issueTitle = await (0, utils_1.issueTitleTemplate)(issueBody);
         const octokit = new action_1.Octokit();
