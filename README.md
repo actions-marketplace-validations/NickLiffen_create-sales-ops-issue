@@ -1,29 +1,15 @@
-# GitHub Actions Boilerplate
+# Create Sales Ops Issue for GHAS Trial
 
-## Introduction
+The purpose of this Github Action is to create an issue within the Sales Support (Operations) GitHub Repository. This will notify them that a GHAS trial needs to be enabled. 
 
-A sample GitHub action boilerplate for Typescript actions. 
+This GitHub Action takes three inputs:
 
-It comes with:
-- **Node 16 Support**: Current LTS. 
-- **ESlint and Prettier**: Code quality and consistency tooling. 
-- **Husky**: Pre-commit hook ensuring code is built before being deployed to GitHub. 
+1. **SFDC Body**. This is the structured object sent from Salesforce to GitHub. It has all the data in about the trial. 
+2. **Approver**: The GitHub Username of the person who approved the trial from an ASE Side. 
+3. **Issue Number**: The GitHub Issue Number tracking this in the GitHub Advanced Security Field Repository. 
+4. **GitHub Token**: The GitHub Token which will create the issue within the Sales Support (Operations) GitHub Repository.
 
-There are many open source actions boilerplates/templates. I use this one as I try and keep it up to date and simplistic. 
+This GitHub Action then outputs two values:
 
-## Getting Started
-
-Click [Use this template](https://github.com/NickLiffen/actions-boilerplate/generate) on this repository. Enter in your action repository name and description, and click *Create repository from template*. 
-
-Close down locally, and run:
-
-```
-yarn install --frozen-lockfile && yarn run build
-```
-
-Edit the required fields within the `package.json` and `action.yml` and you should be good to go. Simply start writing code within the `src` directory. 
-
-## Contrubting?
-
-Simply raise a pull request :) Make sure CI passes and then you should be good to go.
-
+1. **Issue Number**: The GitHub Issue Number created on the Sales Support (Operations) GitHub Repository.
+2. **Issue URL**: The GitHub Issue URL created on the Sales Support (Operations) GitHub Repository.
