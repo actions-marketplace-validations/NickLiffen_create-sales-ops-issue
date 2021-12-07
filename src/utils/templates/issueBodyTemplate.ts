@@ -6,7 +6,7 @@ export const issueBodyTemplate = (
   let orgs = "";
 
   data.github_org.map((org, index) => {
-    orgs += `**Org ${index + 1}**: ${org} <br /> `;
+    orgs += `**GitHub Org ${index + 1}**: ${org} <br /> `;
   });
 
   const org = `${orgs} <br /> (**If possible**, enaling GHAS on the enterprise of these orgs would be great)`;

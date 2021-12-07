@@ -50499,7 +50499,7 @@ exports.issueBodyTemplate = void 0;
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
     let orgs = "";
     data.github_org.map((org, index) => {
-        orgs += `**Org ${index + 1}**: ${org} <br /> `;
+        orgs += `**GitHub Org ${index + 1}**: ${org} <br /> `;
     });
     const org = `${orgs} <br /> (**If possible**, enaling GHAS on the enterprise of these orgs would be great)`;
     const PSEngineer = data.ps_engineer
@@ -50545,7 +50545,7 @@ exports.issueBodyTemplate = issueBodyTemplate;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueTitleTemplate = void 0;
-const issueTitleTemplate = ({ client_name, }) => `Enable GitHub Advanced Security Trial: ${client_name}`;
+const issueTitleTemplate = ({ client_name, }) => ` :lock: Enable GitHub Advanced Security Trial: ${client_name} :lock:`;
 exports.issueTitleTemplate = issueTitleTemplate;
 
 
