@@ -4,14 +4,18 @@ export const issueBodyTemplate = (
   issueNumberInput: string
 ): string => {
   const baseLicenceType =
-    data.instance_type === "ghec"
+    data.instance_type === "GitHub AE"
       ? "GitHub Enterprise Cloud"
       : "GitHub Enterprise Server";
 
   const githubCloudOrgName =
-    data.instance_type === "ghec" ? data.github_org : null;
+    data.instance_type === "GitHub Enterprise Cloud"
+      ? data.github_org
+      : "N/A : GHAS not being enabled on a Cloud Organisation";
   const githubServerOrgName =
-    data.instance_type === "ghes" ? data.github_org : null;
+    data.instance_type === "GitHub Enterprise Server"
+      ? data.github_org
+      : "N/A : GHAS not being enabled on a Server Organisation";
 
   return `
  **Item** | **Description**

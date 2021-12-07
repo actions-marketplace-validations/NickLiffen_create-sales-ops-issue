@@ -29,7 +29,10 @@ type CICDTools =
   | "bb"
   | "none"
   | "other";
-type Instance = "ghec" | "ghes" | "ghae";
+type Instance =
+  | "GitHub Enterprise Server"
+  | "GitHub Enterprise Cloud"
+  | "GitHub AE";
 type Region =
   | "amer_e_east"
   | "amer_e_central"

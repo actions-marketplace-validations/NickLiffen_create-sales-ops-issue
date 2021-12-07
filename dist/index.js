@@ -50497,11 +50497,15 @@ exports.token = token;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueBodyTemplate = void 0;
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
-    const baseLicenceType = data.instance_type === "ghec"
+    const baseLicenceType = data.instance_type === "GitHub AE"
         ? "GitHub Enterprise Cloud"
         : "GitHub Enterprise Server";
-    const githubCloudOrgName = data.instance_type === "ghec" ? data.github_org : null;
-    const githubServerOrgName = data.instance_type === "ghes" ? data.github_org : null;
+    const githubCloudOrgName = data.instance_type === "GitHub Enterprise Cloud"
+        ? data.github_org
+        : "N/A : GHAS not being enabled on a Cloud Organisation";
+    const githubServerOrgName = data.instance_type === "GitHub Enterprise Server"
+        ? data.github_org
+        : "N/A : GHAS not being enabled on a Server Organisation";
     return `
  **Item** | **Description**
  :--: | :--
