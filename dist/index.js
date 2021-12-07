@@ -50411,7 +50411,7 @@ const action_1 = __nccwpck_require__(1231);
 const run = async () => {
     try {
         const issueBodyInput = process.env.CI
-            ? core.getInput("issueBody", { required: false })
+            ? core.getInput("issueBodyPayload", { required: false })
             : await (0, utils_1.issueBodyPayload)();
         const approverInput = process.env.CI
             ? core.getInput("approver", { required: false })
