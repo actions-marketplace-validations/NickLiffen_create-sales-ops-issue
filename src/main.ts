@@ -9,6 +9,9 @@ const run = async (): Promise<void> => {
     ) as IssueBodyTemplate;
     const approverInput = core.getInput("approver", { required: false });
     const issueNumberInput = core.getInput("issueNumber", { required: false });
+    const githubRepositoryInput = core.getInput("githubRepository", {
+      required: false,
+    });
 
     const issueData = await issueBodyTemplate(
       issueBody,
@@ -17,11 +20,11 @@ const run = async (): Promise<void> => {
     );
     const issueTitle = await issueTitleTemplate(issueBody);
 
-    const githubRepository = process.env.GITHUB_REPOSITORY as string;
-
-    if (!githubRepository) throw new Error("GITHUB_REPOSITORY is not set");
-
-    const issueURL = await createIssue(githubRepository, issueTitle, issueData);
+    const issueURL = await createIssue(
+      githubRepositoryInput,
+      issueTitle,
+      issueData
+    );
 
     console.log(`The issue has been created here: ${issueURL}`);
   } catch (error) {

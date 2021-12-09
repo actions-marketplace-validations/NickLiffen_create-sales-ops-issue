@@ -33,3 +33,4 @@ jobs:
           issueBodyPayload: ${{ steps.issue_body_parser.outputs.payload }}
           approver: "NickLiffen"
           issueNumber: "1234"
+          githubRepository: "nickliffen/create-sales-ops-issue"

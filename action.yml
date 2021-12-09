@@ -14,6 +14,9 @@ inputs:
   githubToken:
     description: 'The Token to create an issue on the Sales Ops Issue'
     required: true
+  githubRepository:
+    description: 'The GitHub Repository to create the Issue on'
+    required: true
 outputs:
   opsIssueNumber:
     description: 'The Issue Number Created in the Ops Repo'

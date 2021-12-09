@@ -50285,12 +50285,12 @@ const run = async () => {
         const issueBody = JSON.parse(core.getInput("issueBodyPayload", { required: false }));
         const approverInput = core.getInput("approver", { required: false });
         const issueNumberInput = core.getInput("issueNumber", { required: false });
+        const githubRepositoryInput = core.getInput("githubRepository", {
+            required: false,
+        });
         const issueData = await (0, utils_1.issueBodyTemplate)(issueBody, approverInput, issueNumberInput);
         const issueTitle = await (0, utils_1.issueTitleTemplate)(issueBody);
-        const githubRepository = process.env.GITHUB_REPOSITORY;
-        if (!githubRepository)
-            throw new Error("GITHUB_REPOSITORY is not set");
-        const issueURL = await (0, utils_1.createIssue)(githubRepository, issueTitle, issueData);
+        const issueURL = await (0, utils_1.createIssue)(githubRepositoryInput, issueTitle, issueData);
         console.log(`The issue has been created here: ${issueURL}`);
     }
     catch (error) {
