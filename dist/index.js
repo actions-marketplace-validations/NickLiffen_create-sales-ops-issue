@@ -50290,8 +50290,11 @@ const run = async () => {
         });
         const issueData = await (0, utils_1.issueBodyTemplate)(issueBody, approverInput, issueNumberInput);
         const issueTitle = await (0, utils_1.issueTitleTemplate)(issueBody);
-        const issueURL = await (0, utils_1.createIssue)(githubRepositoryInput, issueTitle, issueData);
-        console.log(`The issue has been created here: ${issueURL}`);
+        const [html_url, number] = await (0, utils_1.createIssue)(githubRepositoryInput, issueTitle, issueData);
+        console.log(`The issue has been created here: ${html_url}`);
+        console.log(`The issue number is: ${number}`);
+        core.setOutput("opsIssueNumber", number);
+        core.setOutput("opsIssueURL", html_url);
     }
     catch (error) {
         console.error(error);
@@ -50313,13 +50316,13 @@ const action_1 = __nccwpck_require__(1231);
 const createIssue = async (githubRepository, issueTitle, issueBody) => {
     const octokit = new action_1.Octokit();
     const [owner, repo] = githubRepository.split("/");
-    const { data } = await octokit.request("POST /repos/{owner}/{repo}/issues", {
+    const { data: { html_url, number }, } = await octokit.request("POST /repos/{owner}/{repo}/issues", {
         owner,
         repo,
         title: issueTitle,
         body: issueBody,
     });
-    return data.html_url;
+    return [html_url, number.toString()];
 };
 exports.createIssue = createIssue;
 
