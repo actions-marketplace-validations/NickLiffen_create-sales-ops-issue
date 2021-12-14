@@ -42,7 +42,7 @@ export const issueBodyTemplate = (
  **Orgs to Enable GHAS:** | ${org}
  **Trial/Extension Length:** | ${data.trial_duration} days
  **Additional details:** | _(i.e. why does your customer need an extension)_
- **POC Issue:** | [advanced-security-field/${issueNumberInput}](https://github.com/github/advanced-security-field/${issueNumberInput})
+ **POC Issue:** | [advanced-security-field/${issueNumberInput}](https://github.com/github/advanced-security-field/issues/${issueNumberInput})
  **Salesforce POC Object:** | ${data.sfdc_poc_url}
  **Links:** | 
  **Tag:** | Sales Rep: @${data.sales_rep} <br /> Solutions Engineer: @${data.solution_engineer} <br /> Professional Services Engineer: ${PSEngineer}
