@@ -20,13 +20,17 @@ const run = async (): Promise<void> => {
     );
     const issueTitle = await issueTitleTemplate(issueBody);
 
-    const issueURL = await createIssue(
+    const [html_url, number] = await createIssue(
       githubRepositoryInput,
       issueTitle,
       issueData
     );
 
-    console.log(`The issue has been created here: ${issueURL}`);
+    console.log(`The issue has been created here: ${html_url}`);
+    console.log(`The issue number is: ${number}`);
+
+    core.setOutput("opsIssueNumber", number);
+    core.setOutput("opsIssueURL", html_url);
   } catch (error) {
     console.error(error);
   }

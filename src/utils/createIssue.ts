@@ -4,14 +4,17 @@ export const createIssue = async (
   githubRepository: string,
   issueTitle: string,
   issueBody: string
-): Promise<string> => {
+): Promise<string[]> => {
   const octokit = new Octokit();
   const [owner, repo] = githubRepository.split("/");
-  const { data } = await octokit.request("POST /repos/{owner}/{repo}/issues", {
+  const {
+    data: { html_url, number },
+  } = await octokit.request("POST /repos/{owner}/{repo}/issues", {
     owner,
     repo,
     title: issueTitle,
     body: issueBody,
   });
-  return data.html_url;
+
+  return [html_url, number.toString()];
 };
