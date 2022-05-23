@@ -53483,6 +53483,9 @@ Object.defineProperty(exports, "createIssue", ({ enumerable: true, get: function
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueBodyTemplate = void 0;
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
     let orgs = "";
     // Providing a readable structure for the orgs
@@ -53503,6 +53506,9 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
         ? ":white_check_mark:"
         : ":x:";
     const ghaeCustomerResponse = data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
+    const enterpriseType = data.enterprise_type ? capitalizeFirstLetter(data.enterprise_type) : 'Organisations';
+    const startDate = data.start_date ? data.start_date : 'N/A - Old Record, Please Check SF Manually';
+    const endDate = data.end_date ? data.end_date : 'N/A - Old Record, Please Check SF Manually';
     // Putting all of the data into a table so it is readable
     const table = `
  **Item** | **Description**
@@ -53512,7 +53518,9 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
  **GHES Customer?:** | ${ghesCustomerResponse}
  **GHAE Customer?:** | ${ghaeCustomerResponse}
  **:stop_sign: Add-ons?** | <li>- [x] __Advanced Security__</li>
- **Orgs to Enable GHAS:** | ${org}
+ **${enterpriseType} to Enable GHAS on:** | ${org}
+ **Start Date of Trail:** | ${startDate}
+ **End Date of Trial:** | ${endDate}
  **Trial/Extension Length:** | ${data.trial_duration} days
  **Additional details:** | _(i.e. why does your customer need an extension)_
  **POC Issue:** | [advanced-security-field/${issueNumberInput}](https://github.com/github/advanced-security-field/issues/${issueNumberInput})
@@ -53539,6 +53547,7 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
   \`\`\`
   -->
   `;
+    console.log('The final data which will will create in the issue is: ', response);
     return response;
 };
 exports.issueBodyTemplate = issueBodyTemplate;

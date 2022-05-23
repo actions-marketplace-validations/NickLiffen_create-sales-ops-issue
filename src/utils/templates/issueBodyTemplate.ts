@@ -34,7 +34,15 @@ export const issueBodyTemplate = (
   const ghaeCustomerResponse =
     data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
 
-  const enterpriseType = capitalizeFirstLetter(data.enterprise_type);
+  const enterpriseType = data.enterprise_type
+    ? capitalizeFirstLetter(data.enterprise_type)
+    : "Organisations";
+  const startDate = data.start_date
+    ? data.start_date
+    : "N/A - Old Record, Please Check SF Manually";
+  const endDate = data.end_date
+    ? data.end_date
+    : "N/A - Old Record, Please Check SF Manually";
 
   // Putting all of the data into a table so it is readable
   const table = `
@@ -46,8 +54,8 @@ export const issueBodyTemplate = (
  **GHAE Customer?:** | ${ghaeCustomerResponse}
  **:stop_sign: Add-ons?** | <li>- [x] __Advanced Security__</li>
  **${enterpriseType} to Enable GHAS on:** | ${org}
- **Start Date of Trail:** | ${data.start_date}
- **End Date of Trial:** | ${data.end_date}
+ **Start Date of Trail:** | ${startDate}
+ **End Date of Trial:** | ${endDate}
  **Trial/Extension Length:** | ${data.trial_duration} days
  **Additional details:** | _(i.e. why does your customer need an extension)_
  **POC Issue:** | [advanced-security-field/${issueNumberInput}](https://github.com/github/advanced-security-field/issues/${issueNumberInput})
@@ -75,5 +83,11 @@ export const issueBodyTemplate = (
   \`\`\`
   -->
   `;
+
+  console.log(
+    "The final data which will will create in the issue is: ",
+    response
+  );
+
   return response;
 };
