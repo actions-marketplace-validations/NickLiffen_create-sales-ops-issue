@@ -53506,9 +53506,15 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
         ? ":white_check_mark:"
         : ":x:";
     const ghaeCustomerResponse = data.instance_type === "GitHub AE" ? ":white_check_mark:" : ":x:";
-    const enterpriseType = data.enterprise_type ? capitalizeFirstLetter(data.enterprise_type) : 'Organisations';
-    const startDate = data.start_date ? data.start_date : 'N/A - Old Record, Please Check SF Manually';
-    const endDate = data.end_date ? data.end_date : 'N/A - Old Record, Please Check SF Manually';
+    const enterpriseType = data.enterprise_type
+        ? capitalizeFirstLetter(data.enterprise_type)
+        : "Organisations";
+    const startDate = data.start_date
+        ? data.start_date
+        : "N/A - Old Record, Please Check SF Manually";
+    const endDate = data.end_date
+        ? data.end_date
+        : "N/A - Old Record, Please Check SF Manually";
     // Putting all of the data into a table so it is readable
     const table = `
  **Item** | **Description**
@@ -53547,7 +53553,7 @@ const issueBodyTemplate = (data, approverInput, issueNumberInput) => {
   \`\`\`
   -->
   `;
-    console.log('The final data which will will create in the issue is: ', response);
+    console.log("The final data which will will create in the issue is: ", response);
     return response;
 };
 exports.issueBodyTemplate = issueBodyTemplate;
