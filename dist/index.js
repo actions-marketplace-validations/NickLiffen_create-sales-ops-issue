@@ -53655,19 +53655,19 @@ const GHASTrialIssueBody = (data, approverInput, issueNumberInput) => {
    **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
     // Formalising the whole issue response. Hiding some data at the bottom of the issue that is used downstream.
     const response = `
-    ${table} <br /><br /> 
-    <!--
-    \`\`\`json ghas_data
-    ${JSON.stringify(data, null, 2)}
-    \`\`\`
-    \`\`\`json approver_input
-    ${JSON.stringify({ approverInput }, null, 2)}
-    \`\`\`
-    \`\`\`json issue_number_input
-    ${JSON.stringify({ issueNumberInput }, null, 2)}
-    \`\`\`
-    -->
-    `;
+${table} <br /><br /> 
+<!--
+\`\`\`json ghas_data
+${JSON.stringify(data, null, 2)}
+\`\`\`
+\`\`\`json approver_input
+${JSON.stringify({ approverInput }, null, 2)}
+\`\`\`
+\`\`\`json issue_number_input
+${JSON.stringify({ issueNumberInput }, null, 2)}
+\`\`\`
+-->
+`;
     console.log("The final data which will will create in the issue is: ", response);
     return response;
 };
@@ -53764,22 +53764,24 @@ const GHECTrialIssueBody = (data, approverInput, issueNumberInput, salesOpsIssue
    `;
     // Formalising the whole issue response. Hiding some data at the bottom of the issue that is used downstream.
     const response = `
-    ${table} <br /><br /> 
-    <!--
-    \`\`\`json ghas_data
-    ${JSON.stringify(data, null, 2)}
-    \`\`\`
-    \`\`\`json approver_input
-    ${JSON.stringify({ approverInput }, null, 2)}
-    \`\`\`
-    \`\`\`json issue_number_input
-    ${JSON.stringify({ issueNumberInput }, null, 2)}
-    \`\`\`
-    \`\`\`json sales_ops_ghas_issue_number_input
-    ${JSON.stringify({ salesOpsIssueNumber }, null, 2)}
-    \`\`\`
-    -->
-    `;
+${table} 
+<br />
+<br /> 
+<!--
+\`\`\`json ghas_data
+${JSON.stringify(data, null, 2)}
+\`\`\`
+\`\`\`json approver_input
+${JSON.stringify({ approverInput }, null, 2)}
+\`\`\`
+\`\`\`json issue_number_input
+${JSON.stringify({ issueNumberInput }, null, 2)}
+\`\`\`
+\`\`\`json sales_ops_ghas_issue_number_input
+${JSON.stringify({ salesOpsIssueNumber }, null, 2)}
+\`\`\`
+-->
+`;
     console.log("The final data which will will create in the issue is: ", response);
     return response;
 };
