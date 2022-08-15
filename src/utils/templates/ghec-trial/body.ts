@@ -45,8 +45,8 @@ export const GHECTrialIssueBody = (
    **Client/Prospect:** | ${data.client_name}
    **What type of Trial Request?** | Initial Request
    **Main License Type?** | <li>- [x] __GHE Cloud (Single Org)__</li>
-   **Enterprise Account ?:** | Yes (see below)
-   **If an Enterprise Account is being requested:** | This is a GHE trial linked to a GHAS trial. There are some GHAS features at the enterprise lense that we would love customers to test. Thank you. 
+   **Enterprise Account ?:** | No (see below)
+   **If an Enterprise Account is being requested:** | No Enterprise Account Required 
    **Any Additional Products Needed?** | Yes, GHAS. See the Sales Ops Ticket for GHAS here: [sales-operations/${salesOpsIssueNumber}](https://github.com/github/sales-operations/issues/${salesOpsIssueNumber}), the advanced security field ticket for GHAS here: [advanced-security-field/${issueNumberInput}](https://github.com/github/advanced-security-field/issues/${issueNumberInput}) and the Salesforce PoC object for GHAS here: ${data.sfdc_poc_url}.
    **Additional Codespaces Trial Information:** | N/A
    **Please list any existing trial Cloud Orgs or Server Orgs:** | ${org}
