@@ -71,7 +71,7 @@ export const GHASTrialIssueBody = (
    Approved By: __@${approverInput}__
    
    ---
-   **Mention:** _@github/sales-support_ _@github/revenue_ (for :eyes: and :+1: on all day 46-90 requests)`;
+   **Mention:** _@github/sales-support_ (for :eyes: and :+1: on all day 46-90 requests)`;
 
   // Formalising the whole issue response. Hiding some data at the bottom of the issue that is used downstream.
   const response = `

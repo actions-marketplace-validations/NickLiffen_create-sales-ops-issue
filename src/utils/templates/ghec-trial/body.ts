@@ -55,7 +55,7 @@ export const GHECTrialIssueBody = (
    **End Date of Trial:** | ${endDate}
    **Trial/Extension Length:** | ${data.trial_duration} days
    **Links:** | 
-   **Tag:** | Sales Rep: @${data.sales_rep} <br /> Solutions Engineer: @${data.solution_engineer} <br /> Professional Services Engineer: ${PSEngineer} <br /> Sales Support: @github/sales-support <br /> Revenue: @github/revenue
+   **Tag:** | Sales Rep: @${data.sales_rep} <br /> Solutions Engineer: @${data.solution_engineer} <br /> Professional Services Engineer: ${PSEngineer} <br /> Sales Support: @github/sales-support <br />
    
    Approved By: __@${approverInput}__
    
