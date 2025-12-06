@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Parse Issue Body
-        uses: peter-murray/issue-body-parser-action@v2
+        uses: peter-murray/issue-body-parser-action@v3
         id: issue_body_parser
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +22,7 @@ jobs:
         run: |
           echo ${{ steps.issue_body_parser.outputs.payload }}
       - name: Git Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Running a Test
         id: test
         uses: ./
